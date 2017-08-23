@@ -8,6 +8,9 @@ Usage
 
     docker run -it --device /dev/kvm -p 5554:5554 -p 5555:5555 aiwin/android-avd-base
 
+The `--device /dev/kvm` flag is required to enable CPU hardware acceleration.
+You may also need to activate `kvm` kernel module on your host machine: `modprobe kvm`, or even install it first.
+
 
 Build
 --------------
