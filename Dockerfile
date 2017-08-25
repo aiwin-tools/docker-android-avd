@@ -13,10 +13,10 @@ RUN apt-get --quiet install --yes --no-install-recommends lib32stdc++6 lib32z1 l
     apt-get --quiet clean --yes && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN $ANDROID_SDK_HOME/tools/bin/sdkmanager "system-images;android-${ANDROID_TARGET_SDK};google_apis;x86_64" && \
+RUN $ANDROID_SDK_HOME/tools/bin/sdkmanager "system-images;android-${ANDROID_TARGET_SDK};google_apis;arm64-v8a" && \
     yes | $ANDROID_SDK_HOME/tools/bin/sdkmanager --licenses && \
     $ANDROID_SDK_HOME/tools/bin/sdkmanager --update && \
-    echo no | $ANDROID_SDK_HOME/tools/bin/avdmanager create avd -f -n ${ANDROID_AVD_NAME} -k "system-images;android-${ANDROID_TARGET_SDK};google_apis;x86_64" --abi google_apis/x86_64
+    echo no | $ANDROID_SDK_HOME/tools/bin/avdmanager create avd -f -n ${ANDROID_AVD_NAME} -k "system-images;android-${ANDROID_TARGET_SDK};google_apis;arm64-v8a" --abi google_apis/arm64-v8a
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY socat.sh /usr/local/bin/socat.sh
