@@ -25,10 +25,12 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY socat.sh /usr/local/bin/socat.sh
 COPY stop-emulators.sh $HOME/scripts/android/stop-emulators.sh
 COPY wait-for-emulator.sh $HOME/scripts/android/wait-for-emulator.sh
+COPY prepare-emulator.sh $HOME/scripts/android/prepare-emulator.sh
 
 RUN mkdir -p /var/log/supervisor && \
     chmod +x /usr/local/bin/socat.sh && \
     chmod +x $HOME/scripts/android/stop-emulators.sh && \
-    chmod +x $HOME/scripts/android/wait-for-emulator.sh
+    chmod +x $HOME/scripts/android/wait-for-emulator.sh && \
+    chmod +x $HOME/scripts/android/prepare-emulator.sh
 
 CMD /usr/bin/supervisord
