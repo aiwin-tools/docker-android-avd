@@ -16,6 +16,7 @@ RUN apt-get --quiet install --yes --no-install-recommends lib32stdc++6 lib32z1 l
 RUN $ANDROID_SDK_HOME/tools/bin/sdkmanager "system-images;android-${ANDROID_TARGET_SDK};google_apis;arm64-v8a" && \
     yes | $ANDROID_SDK_HOME/tools/bin/sdkmanager --licenses && \
     $ANDROID_SDK_HOME/tools/bin/sdkmanager --update && \
+    $ANDROID_SDK_HOME/tools/bin/sdkmanager "system-images;android-${ANDROID_TARGET_SDK};google_apis;arm64-v8a" && \
     echo no | $ANDROID_SDK_HOME/tools/bin/avdmanager create avd -f -n ${ANDROID_AVD_NAME} -k "system-images;android-${ANDROID_TARGET_SDK};google_apis;arm64-v8a" --abi google_apis/arm64-v8a
 
 RUN mkdir -p $HOME/scripts/android
