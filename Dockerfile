@@ -18,10 +18,18 @@ RUN $ANDROID_SDK_HOME/tools/bin/sdkmanager "system-images;android-${ANDROID_TARG
     $ANDROID_SDK_HOME/tools/bin/sdkmanager --update && \
     echo no | $ANDROID_SDK_HOME/tools/bin/avdmanager create avd -f -n ${ANDROID_AVD_NAME} -k "system-images;android-${ANDROID_TARGET_SDK};google_apis;arm64-v8a" --abi google_apis/arm64-v8a
 
+RUN mkdir -p $HOME/scripts/android
+
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY socat.sh /usr/local/bin/socat.sh
+COPY stop-emulators.sh $HOME/scripts/android/stop-emulators.sh
+COPY wait-for-emulator.sh $HOME/scripts/android/wait-for-emulator.sh
+COPY prepare-emulator.sh $HOME/scripts/android/prepare-emulator.sh
 
 RUN mkdir -p /var/log/supervisor && \
-    chmod +x /usr/local/bin/socat.sh
+    chmod +x /usr/local/bin/socat.sh && \
+    chmod +x $HOME/scripts/android/stop-emulators.sh && \
+    chmod +x $HOME/scripts/android/wait-for-emulator.sh && \
+    chmod +x $HOME/scripts/android/prepare-emulator.sh
 
 CMD /usr/bin/supervisord
